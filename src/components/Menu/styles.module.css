@@ -17,6 +17,8 @@
     text-decoration: none;
     background-color: var(--primary);
     color: var(--text-over-primary);
+    padding: 1.5rem;
+    border-radius: 5px;
     transition: all 0.1s ease-in-out;
 }
 .MenuLink:hover {

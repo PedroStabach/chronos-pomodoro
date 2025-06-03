@@ -1,19 +1,19 @@
 import styles from './styles.module.css';
-import { TimerIcon } from 'lucide-react';
+import { HistoryIcon, HomeIcon, SettingsIcon, SunIcon } from 'lucide-react';
 export function Menu() {
     return (
         <div className={styles.Menu}>
             <a className={styles.MenuLink} href="#">
-                <TimerIcon />
+                <HomeIcon />
             </a>
             <a className={styles.MenuLink} href="#">
-                <TimerIcon />
+                <HistoryIcon />
             </a>
             <a className={styles.MenuLink} href="#">
-                <TimerIcon />
+                <SettingsIcon />
             </a>
             <a className={styles.MenuLink} href="#">
-                <TimerIcon />
+                <SunIcon />
             </a>
         </div>
         )
