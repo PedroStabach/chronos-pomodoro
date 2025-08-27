@@ -3,16 +3,47 @@ import { Cycles } from "../Cycles";
 import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
 import { useRef, useState } from "react";
+import type { TaskModel } from "../../models/TaskModel";
+import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 
 
 export function MainForm() {
+    const {setState} = useTaskContext();
     const [taskName, setTaskName] = useState();
     const taskNameInput = useRef<HTMLInputElement>(null);
     const numero = useRef(0);
     function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        numero.current += 1;
-        console.log('Criando nova tarefa ', taskName);
+        
+        if (taskNameInput.current === null) return;
+
+        const taskName = taskNameInput.current.value.trim();
+        if(!taskName) {
+            return;
+        }
+
+        const newTask: TaskModel = {
+            id: Date.now().toString(),
+            name: taskName,
+            startDate: Date.now(),
+            completeDate: null,
+            interruptDate: null,
+            duration: 1,
+            type: 'workTime',
+        };
+
+        const secondsRemaining =newTask.duration * 60;
+
+        setState( prevState => {
+            return {
+                ...prevState,
+                activeTaskId: newTask,
+                currentCycle: 1, // conferir
+                secondsRemaining,
+                formattedSecondsReamaning: '00:00',
+                tasks: [...prevState.tasks, newTask],
+            }
+        });
     }
     return (
         <form onSubmit={handleCreateNewTask} className='form' action=''>
